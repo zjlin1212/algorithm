@@ -1,0 +1,11 @@
+1.
+-x=(~x+1)
+prove:(eg:x=-6(1010);~x=5(0101))
+x+~x=1111=-11=>-x=(~x+1)
+
+2.
+return the value of the last "1"
+int lowestbit(int x)
+{
+    return x&(-x);
+}

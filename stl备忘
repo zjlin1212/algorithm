@@ -2,3 +2,9 @@ list:
 splice:
 http://www.cplusplus.com/reference/list/list/splice/
 
+traverse map
+map<char,int> m;
+for(auto i :m){
+ret=min(ret,i.second);//i.second is value
+}
+

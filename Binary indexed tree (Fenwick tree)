@@ -1,1 +1,41 @@
 https://www.hackerearth.com/notes/binary-indexed-tree-made-easy-2/
+*/
+class NumArray {
+public:
+    NumArray(vector<int> &nums) {
+        BIT=vector<int>(nums.size()+1,0);
+        data=nums;
+        for(int i=1;i<=nums.size();i++){
+            int lowbit=i&(-i);
+            for(int j=i;j>i-lowbit;j--)
+                BIT[i]+=nums[j-1];
+        }
+    }
+    
+    void update(int i, int val) {
+        int diff=val-data[i];
+        data[i]=val;
+        i++;
+        while(i<BIT.size()){
+            BIT[i]+=diff;
+            i=i+(i&(-i));
+        }
+
+    }
+    
+    int sumRange(int i, int j) {
+        return sum(j)-sum(i-1);
+    }
+    int sum(int index){
+        index++;
+        int ret=0;
+        while(index!=0){
+            ret+=BIT[index];
+            index=index&(index-1);
+        }
+        return ret;
+    }
+private:
+    vector<int> BIT;
+    vector<int> data;
+};

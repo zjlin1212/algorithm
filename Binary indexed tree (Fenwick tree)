@@ -20,6 +20,7 @@ public:
         //During an update, we just care about the right links we follow
             BIT[i]+=diff;
             i=i+(i&(-i));
+            //(i&(-i)) rightmost one
             //1001->1010->1100->1000
         }
 

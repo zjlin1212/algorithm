@@ -21,6 +21,7 @@ public:
             BIT[i]+=diff;
             i=i+(i&(-i));
             //(i&(-i)) rightmost one
+            //node find the parent in the right(node is of which parent's left)
             //1001->1010->1100->1000
         }
 
@@ -38,6 +39,7 @@ public:
             ret+=BIT[index];
             index=index&(index-1);
             // During a sum, we just care about the left links we follow.
+            //right node find parent in the left(node is of which parent's right)
             //eg:1110->1100->1000->0
         }
         return ret;

@@ -17,8 +17,10 @@ public:
         data[i]=val;
         i++;
         while(i<BIT.size()){
+        //During an update, we just care about the right links we follow
             BIT[i]+=diff;
             i=i+(i&(-i));
+            //1001->1010->1100->1000
         }
 
     }
@@ -27,11 +29,15 @@ public:
         return sum(j)-sum(i-1);
     }
     int sum(int index){
+    //keep a variable ans initialized to 0. Follow the path from root to the index node.
+    //Whenever we need to follow a right link, add the value of current node to ans. Once we reach the node, add that value too
         index++;
         int ret=0;
         while(index!=0){
             ret+=BIT[index];
             index=index&(index-1);
+            // During a sum, we just care about the left links we follow.
+            //eg:1110->1100->1000->0
         }
         return ret;
     }

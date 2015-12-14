@@ -9,6 +9,7 @@ ret=min(ret,i.second);//i.second is value
 }
 
 ///去vector重复
+sort(ret.begin(),ret.end());
 vector<string>::iterator it=unique(ret.begin(),ret.end());
 ret.resize(distance(ret.begin(),it));
 

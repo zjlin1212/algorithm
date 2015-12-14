@@ -8,3 +8,7 @@ for(auto i :m){
 ret=min(ret,i.second);//i.second is value
 }
 
+///去vector重复
+vector<string>::iterator it=unique(ret.begin(),ret.end());
+ret.resize(distance(ret.begin(),it));
+

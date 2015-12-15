@@ -14,9 +14,9 @@ public:
         int left=start+1,right=end;
         int tmp;
         while(left<right){
-            while(left<=right&&nums[left]<nums[start])
+            while(left<=right&&nums[left]<=nums[start])
                 left++;
-            while(left<=right&&nums[right]>nums[start])
+            while(left<=right&&nums[right]>=nums[start])
                 right--;
             if(left<right){
                 tmp=nums[left];

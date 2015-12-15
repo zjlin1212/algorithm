@@ -11,28 +11,40 @@ public:
                 BIT[i]+=nums[j-1];
         }
     }
-    
+    int lowbit(int x) {
+        return x & -x;
+    }
+    FenwickTree (int n){
+        BIT=vector<int>(n+1,0);
+        data=vector<int>(n+1,0);
+    }
+    void add(int x, int val) {
+        while (x <= BIT.size()) {
+            BIT[x] += val;
+            x += lowbit(x);
+        }
+    }
     void update(int i, int val) {
         int diff=val-data[i];
         data[i]=val;
         i++;
         while(i<BIT.size()){
-        //During an update, we just care about the right links we follow
+            //During an update, we just care about the right links we follow
             BIT[i]+=diff;
             i=i+(i&(-i));
             //(i&(-i)) rightmost one
             //node find the parent in the right(node is of which parent's left)
             //1001->1010->1100->1000
         }
-
+        
     }
     
     int sumRange(int i, int j) {
         return sum(j)-sum(i-1);
     }
     int sum(int index){
-    //keep a variable ans initialized to 0. Follow the path from root to the index node.
-    //Whenever we need to follow a right link, add the value of current node to ans. Once we reach the node, add that value too
+        //keep a variable ans initialized to 0. Follow the path from root to the index node.
+        //Whenever we need to follow a right link, add the value of current node to ans. Once we reach the node, add that value too
         index++;
         int ret=0;
         while(index!=0){

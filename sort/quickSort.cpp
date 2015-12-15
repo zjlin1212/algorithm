@@ -24,7 +24,7 @@ public:
                 nums[right]=tmp;
             }
         }
-        while(right>start&&nums[right]>nums[start])
+        while(right>start&&nums[right]>=nums[start])
             right--;
         if(right>start){
             tmp=nums[right];

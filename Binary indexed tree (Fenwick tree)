@@ -45,7 +45,8 @@ public:
     int sum(int index){
         //keep a variable ans initialized to 0. Follow the path from root to the index node.
         //Whenever we need to follow a right link, add the value of current node to ans. Once we reach the node, add that value too
-        index++;
+        index++;//把当前节点也算上，如果不算这个节点就不用++
+        
         int ret=0;
         while(index!=0){
             ret+=BIT[index];

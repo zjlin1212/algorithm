@@ -9,5 +9,8 @@ int lowestbit(int x)
 {
     return x&(-x);
 }
-
-
+3.
+交换2个数
+a=a^b;/*^是异或操作*/
+b=b^a;
+a=a^b;

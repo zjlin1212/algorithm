@@ -13,3 +13,14 @@ sort(ret.begin(),ret.end());
 vector<string>::iterator it=unique(ret.begin(),ret.end());
 ret.resize(distance(ret.begin(),it));
 
+//heap
+Push element into heap range
+Given a heap in the range [first,last-1), this function extends the range considered a heap to [first,last) by placing the value in (last-1) into its corresponding location within it.
+A range can be organized into a heap by calling make_heap. After that, its heap properties are preserved if elements are added and removed from it using push_heap and pop_heap, respectively.
+
+1.make_heap(O(n))
+2.pop_heap(到最后)(2log(n))
+3.push_heap(最后一个更新)(log(n))
+4.pop_back(O(1))
+5.priority_queue::pop  :One call to pop_heap and one call to pop_back on the underlying container.
+

@@ -1,0 +1,36 @@
+binary search
+第一个比目标值大的元素的位置:
+int func1(const vector<int> &nums, int target)
+{
+    if(nums.size() < 1)
+        return -1;
+    int low = 0;
+    int high = nums.size() - 1;
+    while(low <= high)
+    {
+        int mid = (low + high) >> 1;
+        if(nums[mid] <= target)
+            low = mid + 1;
+        else
+            high = mid -1;
+    }
+    return low;
+}
+比目标小的最大的值
+int func2(const vector<int> &nums, int target)
+{
+    if(nums.size() < 1)
+        return -1;
+    int low = 0;
+    int high = nums.size() -1;
+    while(low <= high)
+    {
+        int mid = (low + high)>>1;
+        if(nums[mid] >= target)
+            high = mid - 1;
+        else
+            low = mid +1;
+    }
+        return high;
+}
+//如果所有元素都比目标元素大，返回-1

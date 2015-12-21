@@ -13,6 +13,7 @@ public:
     }
     int lowbit(int x) {
         return x & -x;
+        //equas to x & (~(x - 1));
     }
     FenwickTree (int n){
         BIT=vector<int>(n+1,0);

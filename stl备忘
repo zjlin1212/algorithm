@@ -1,5 +1,9 @@
 list:
 splice:
+void splice (iterator position, list& x, iterator i);
+把x的i挪到position前面
+void splice (iterator position, list& x, iterator first, iterator last);
+挪fist到last-1
 http://www.cplusplus.com/reference/list/list/splice/
 
 traverse map

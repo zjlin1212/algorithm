@@ -34,3 +34,44 @@ int func2(const vector<int> &nums, int target)
         return high;
 }
 //如果所有元素都比目标元素大，返回-1
+
+//寻找下界
+    int findLower(const vector<int> &nums, int target)
+    {
+        if(nums.size() < 1)
+            return -1;
+        int low = 0;
+        int high = nums.size() -1;
+        while(low <= high)
+        {
+            int mid = (low + high)>>1;
+            if(nums[mid] >= target)
+                high = mid - 1;
+            else
+                low = mid +1;
+        }
+        if(low < nums.size() && nums[low] == target)
+            return low;
+        else
+            return -1;
+    }
+//寻找上界
+int findUpper(const vector<int> &nums, int target)
+{
+    if(nums.size() < 1)
+        return -1;
+    int low = 0;
+    int high = nums.size() - 1;
+    while(low <= high)
+    {
+        int mid = (low + high) >> 1;
+        if(nums[mid] <= target)
+            low = mid + 1;
+        else
+            high = mid -1;
+    }
+    if(high > -1 && nums[high] == target)
+        return high;
+    else
+        return -1;
+}

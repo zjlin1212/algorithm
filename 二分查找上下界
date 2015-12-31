@@ -35,9 +35,14 @@ int func2(const vector<int> &nums, int target)
 }
 //如果所有元素都比目标元素大，返回-1
 
-//寻找下界
-    int findLower(const vector<int> &nums, int target)
+//有重复的数里面找下界
+//但是如果不存在，找到的下标low可能比target大，所以只适用于返回-1的情况
+ int findLower(const vector<int> &nums, int target)
     {
+        /*
+         if(target<nums.front())
+            return -1;
+         */
         if(nums.size() < 1)
             return -1;
         int low = 0;
@@ -55,23 +60,25 @@ int func2(const vector<int> &nums, int target)
         else
             return -1;
     }
-//寻找上界
-int findUpper(const vector<int> &nums, int target)
-{
-    if(nums.size() < 1)
-        return -1;
-    int low = 0;
-    int high = nums.size() - 1;
-    while(low <= high)
+//有重复的数里面找上界
+//但是如果不存在，找到的下标high可能比target小，所以只适用于返回-1的情况
+    int findUpper(const vector<int> &nums, int target)
     {
-        int mid = (low + high) >> 1;
-        if(nums[mid] <= target)
-            low = mid + 1;
-        else
-            high = mid -1;
-    }
-    if(high > -1 && nums[high] == target)
+        /*
+         if(target>nums.back())
+            return num.size();
+         */
+        if(nums.size() < 1)
+            return -1;
+        int low = 0;
+        int high = nums.size() - 1;
+        while(low <= high)
+        {
+            int mid = (low + high) >> 1;
+            if(nums[mid] <= target)
+                low = mid + 1;
+            else
+                high = mid -1;
+        }
         return high;
-    else
-        return -1;
-}
+    }

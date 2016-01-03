@@ -24,6 +24,7 @@ A range can be organized into a heap by calling make_heap. After that, its heap 
 
 1.make_heap(O(n))
 2.pop_heap(到最后)(2log(n))
+ pop_heap(lists.begin(),lists.end(),[](ListNode *l1,ListNode *l2){return l1->val>l2->val;});
 3.push_heap(最后一个更新)(log(n))
 4.pop_back(O(1))
 5.priority_queue::pop  :One call to pop_heap and one call to pop_back on the underlying container.

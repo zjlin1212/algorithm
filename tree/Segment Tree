@@ -1,56 +1,61 @@
-struct SegmentTreeNode {
-    int s, e, sum;
-    SegmentTreeNode* left; 
-    SegmentTreeNode* right;
-    SegmentTreeNode(int _s, int _e) : s(_s), e(_e), sum(0), left(NULL), right(NULL) {}
+struct segmentTreeNode{
+    int sum;
+    int l,r;
+    segmentTreeNode* left,*right;
+    segmentTreeNode(int _l,int _r):sum(0),l(_l),r(_r),left(NULL),right(NULL){};
 };
-
-class SegmentTree {
+class segmentTree{
 public:
-    SegmentTree(vector<int>& nums) {
-        int n = nums.size();
-        root = buildST(nums, 0, n - 1);
+    segmentTreeNode *root;
+    segmentTree(vector<int>& nums){
+        root=buildNode(nums,0,nums.size()-1);
     }
-
-    void update(int i, int val) {
-        update(root, i, val);
+    void updateNode(int index,int num){
+        updateNode(root,index,num);
     }
-
-    int sumRange(int i, int j) {
-        return sumRange(root, i, j);
+    int getSum(int l_index,int r_index){
+        return sumRange(root, l_index, r_index);
     }
 private:
-    SegmentTreeNode* root;
-    SegmentTreeNode* buildST(vector<int>& nums, int s, int e) {
-        if (s > e) return NULL;
-        else {
-            SegmentTreeNode* res = new SegmentTreeNode(s, e);
-            if (s == e) res->sum = nums[s];
-            else {
-                int m = s + (e - s) / 2;
-                res->left = buildST(nums, s, m);
-                res->right = buildST(nums, m + 1, e);
-                res->sum = res->left->sum + res->right->sum;
+    void updateNode(segmentTreeNode * root,int index,int num){
+        if(root->l==root->r&&root->l==index){
+            root->sum=num;
+        }else{
+            int mid=(root->l+root->r)/2;
+            if(index<=mid){
+                int temp=root->left->sum;
+                updateNode(root->left,index,num);
+                root->sum=root->sum-temp+root->left->sum;
+            }else{
+                int temp=root->right->sum;
+                updateNode(root->right,index,num);
+                root->sum=root->sum-temp+root->right->sum;
             }
-            return res;
+                
         }
     }
-    void update(SegmentTreeNode* root, int i, int val) {
-        if (root->s == root->e) root->sum = val;
-        else {
-            int m = root->s + (root->e - root->s) / 2;
-            if (i <= m) update(root->left, i, val);
-            else update(root->right, i, val);
-            root->sum = root->left->sum + root->right->sum;
-        }
+    int sumRange(segmentTreeNode* root, int l_index,int r_index){
+        if(root->l==l_index&&root->r==r_index)
+            return root->sum;
+        int mid=(root->l+root->r)/2;
+        if(r_index<=mid)
+            return sumRange(root->left, l_index, r_index);
+        if(l_index>mid)
+            return sumRange(root->right, l_index, r_index);
+        return sumRange(root->left, l_index, mid)+sumRange(root->right, mid+1, r_index);
     }
-    int sumRange(SegmentTreeNode* root, int s, int e) {
-        if (root->s == s && root->e == e) return root->sum;
-        else {
-            int m = root->s + (root->e - root->s) / 2;
-            if (e <= m) return sumRange(root->left, s, e);
-            else if (s >= m + 1) return sumRange(root->right, s, e);
-            else return sumRange(root->left, s, m) + sumRange(root->right, m + 1, e);
+    segmentTreeNode* buildNode(vector<int>&nums,int l_index,int r_index){
+        if(l_index>r_index)
+            return NULL;
+        segmentTreeNode* ret=new segmentTreeNode(l_index,r_index);
+        if(l_index==r_index)
+            ret->sum=nums[l_index];
+        else{
+            int mid=(l_index+r_index)/2;
+            ret->left=buildNode(nums, l_index, mid);
+            ret->right=buildNode(nums, mid+1,r_index);
+            ret->sum=ret->left->sum+ret->right->sum;
         }
+        return ret;
     }
 };

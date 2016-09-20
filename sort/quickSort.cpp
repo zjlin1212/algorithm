@@ -1,38 +1,29 @@
 class Solution {
 public:
-    int findKthLargest(vector<int>& nums, int k) {
-        return 0;
+    void quicksort(vector<int>& v){
+        quicksort(v,0,v.size()-1);
     }
-    void quickSort(vector<int>&nums,int left,int right){
-        if(left<right){
-            int pivot=partition(nums,left,right);
-            quickSort(nums, left, pivot-1);
-            quickSort(nums, pivot+1, right);
-        }
-    }
-    int partition(vector<int>& nums,int start,int end){
+    void quicksort(vector<int>&v,int start,int end){
+        if(end<=start)
+            return;
+        int pivot=v[start];
         int left=start+1,right=end;
-        int tmp;
         while(left<right){
-            while(left<=right&&nums[left]<=nums[start])
+            while(left<end&&v[left]<=pivot)
                 left++;
-            while(left<=right&&nums[right]>=nums[start])
+            while(right>start&&v[right]>=pivot) //只要有一个>=即可
                 right--;
             if(left<right){
-                tmp=nums[left];
-                nums[left]=nums[right];
-                nums[right]=tmp;
+                int tmp=v[left];
+                v[left]=v[right];
+                v[right]=tmp;
             }
         }
-        while(right>start&&nums[right]>=nums[start])
+        while(right>start&&v[right]>=pivot)
             right--;
-        if(right>start){
-            tmp=nums[right];
-            nums[right]=nums[start];
-            nums[start]=tmp;
-            return right;
-        }else
-            return start;
-        
+        swap(v[start],v[right]);
+            
+        quicksort(v,start,right-1);
+        quicksort(v,right+1,end);
     }
 };

@@ -1,5 +1,7 @@
 class KMP{
 public:
+    //0 0 0 0 1 0 0 1 2 3 4 5 2 3 4 
+    //a b c d a e e a b c d a b c d
     vector<int> initNext(string s){
         vector<int> next(s.size(),0);
         for(int i=1,k=0;i<s.size();i++){

@@ -1,5 +1,5 @@
 binary search
-第一个比目标值大的元素的位置:
+第一个比目标值大的元素的位置 (如果有等于， 也返回大于的，最小的值):
 int func1(const vector<int> &nums, int target)
 {
     if(nums.size() < 1)
@@ -16,7 +16,7 @@ int func1(const vector<int> &nums, int target)
     }
     return low;
 }
-比目标小的最大的值
+比目标小的最大的值 (如果有等于， 也返回小于的，最大的值)
 int func2(const vector<int> &nums, int target)
 {
     if(nums.size() < 1)

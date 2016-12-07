@@ -1,0 +1,8 @@
+首先明确问题，给的是stream 还是 array；需要的k个元素是否需要排序？
+1. heap方法  O(nlogk)
+2. quisksort方法
+O(N) best case / O(N^2) worst case running time + O(1) memory
+The smart approach for this problem is to use the selection algorithm (based on the partion method - the same one as used in quicksort).
+
+O(N) guaranteed running time + O(1) space
+So how can we improve the above solution and make it O(N) guaranteed? The answer is quite simple, we can randomize the input, so that even when the worst case input would be provided the algorithm wouldn't be affected. So all what it is needed to be done is to shuffle the input.

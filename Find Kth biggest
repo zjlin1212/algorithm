@@ -1,0 +1,94 @@
+class Solution {
+public:
+    //O(n)
+    int findKth(vector<int>& nums, int k, int low, int high) {
+        if(low == high)
+            return nums[low];
+        int pivot = low;
+        int left = low, right = high;
+        low ++;
+        while(low< high) {
+            while(low < high && nums[low] <= nums[pivot])
+                low++;
+            while(low < high && nums[high] >= nums[pivot])
+                high--;
+            
+            if(low < high)
+                swap(nums[low], nums[high]);
+        }
+        while(high > pivot && nums[high] >= nums[pivot])
+            high--;
+        
+        if(high > pivot)
+            swap(nums[high], nums[pivot]);
+        
+        if(high - left == k)
+            return nums[high];
+        if(high - left > k)
+            return findKth(nums, k, left, high);
+        else
+            return findKth(nums, k - (high + 1 - left), high + 1, right);
+        
+    }
+    int findKthLargest(vector<int>& nums, int k) {
+        k = nums.size()-k;
+        return findKth(nums, k, 0, nums.size() - 1);
+    }
+};
+/*
+class Solution {
+public:
+    //O(n)
+    int quicksort(vector<int>&v,int start,int end){
+        if(end<=start)
+            return end;
+        int left=start+1,right=end;
+        int pivot=v[start];
+        while(left<right){
+            while(left<right&&v[left]<=pivot)
+                left++;
+            while(left<right&&v[right]>=pivot)
+                right--;
+            if(left<right)
+                swap(v[left],v[right]);
+        }
+        while(right>start&&v[right]>pivot)
+            right--;
+        swap(v[right],v[start]);
+        return right;
+    }
+    int findKthLargest(vector<int>& nums, int k) {
+        k=nums.size()-k;
+        int mid;
+        int l=0,r=nums.size()-1;
+        while(l<r){
+            mid=quicksort(nums,l,r);
+            if(k<mid)
+                r=mid-1;
+            else if(k>mid)
+                l=mid+1;
+            else
+                break;
+        }
+        return nums[k];
+    }
+};
+*/
+
+
+/*
+class Solution {
+public:
+//klog(n)
+    int findKthLargest(vector<int>& nums, int k) {
+        make_heap(nums.begin(),nums.end());
+        for(int i=0;i<k-1;i++){
+            pop_heap(nums.begin(),nums.end());
+            nums.pop_back();
+        }
+        return nums.front();
+            
+    }
+};
+
+*/

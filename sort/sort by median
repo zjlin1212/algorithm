@@ -1,0 +1,15 @@
+    //larger than target -> target ->smaller than target
+    void sortByMedian(vector<int> &nums, double target) {
+        int i =0, l = 0, r = nums.size() -1;
+        while(i <= r) {
+            if(nums[i] > target) {
+                swap(nums[i++],nums[l++]);
+            }
+            else if(nums[i] < target) {
+                swap(nums[i], nums[r--]);
+            } else{
+                i++;
+            }
+                
+        }
+    }

@@ -3,27 +3,38 @@ public:
     void quicksort(vector<int>& v){
         quicksort(v,0,v.size()-1);
     }
-    void quicksort(vector<int>&v,int start,int end){
-        if(end<=start)
-            return;
-        int pivot=v[start];
-        int left=start+1,right=end;
-        while(left<right){
-            while(left<end&&v[left]<=pivot)
-                left++;
-            while(right>start&&v[right]>=pivot) //只要有一个>=即可
-                right--;
-            if(left<right){
-                int tmp=v[left];
-                v[left]=v[right];
-                v[right]=tmp;
-            }
+    void quicksort(vector<int>& nums, int low, int high) {
+        if(low >= high)
+            return ;
+        int left = low, right = high;
+        int pivot = low;
+        low++;
+        /*
+        //both are right
+        while(low < high) {
+            while(low <= high && nums[low] < nums[pivot])
+                low++;
+            while(low <= high && nums[high] > nums[pivot])
+                high--;
+            if(low < high)
+                swap(nums[low++], nums[high--]);
         }
-        while(right>start&&v[right]>=pivot)
-            right--;
-        swap(v[start],v[right]);
-            
-        quicksort(v,start,right-1);
-        quicksort(v,right+1,end);
+        */
+        while(low < high) {
+            while(low <= high && nums[low] <= nums[pivot])
+                low++;
+            while(low <= high && nums[high] >= nums[pivot])
+                high--;
+            if(low < high)
+                swap(nums[low], nums[high]);
+        }
+        
+        while(high > pivot && nums[high] >= nums[pivot])
+            high--;
+        if(high > pivot)
+            swap(nums[high], nums[pivot]);
+        quicksort(nums, left, high - 1);
+        quicksort(nums, high + 1, right);
+        
     }
 };
